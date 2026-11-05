@@ -1,0 +1,12 @@
+{
+  "LEEME": "Escriban aquí los nombres y matrículas reales y ejecuten: node presentacion/construir_presentacion.js",
+  "equipo": "Equipo 3",
+  "grupo": "Laboratorio de Seguridad en Bases de Datos",
+  "fecha_revision": "Jueves 19 de noviembre de 2026",
+  "integrantes": [
+    { "nombre": "Nombre del integrante 1", "matricula": "0000000" },
+    { "nombre": "Nombre del integrante 2", "matricula": "0000000" },
+    { "nombre": "Nombre del integrante 3", "matricula": "0000000" },
+    { "nombre": "Nombre del integrante 4", "matricula": "0000000" }
+  ]
+}

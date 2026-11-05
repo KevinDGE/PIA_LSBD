@@ -1,0 +1,2 @@
+# Nadie puede abrir estos archivos desde el navegador; solo PHP los incluye.
+Require all denied

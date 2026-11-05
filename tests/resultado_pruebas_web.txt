@@ -1,0 +1,102 @@
+
+== 1. Cartelera y páginas públicas
+  OK     Cartelera visible sin sesión (200)
+  OK     Título y favicon propios
+  OK     Favicon responde 200
+  OK     Página de película con horarios
+
+== 2. Bloqueo de compra sin sesión (servidor)
+  OK     asientos.php sin sesión redirige a login
+  OK     pago.php sin token CSRF -> 400
+  OK     pago.php con CSRF válido pero sin sesión -> login
+  OK     boletos.php sin sesión -> login
+  OK     Base de datos rechaza compra sin usuario (Resultado 10)
+
+== 3. Registro, trigger de log y login
+  OK     Registro crea la cuenta
+  OK     Contraseña guardada como hash de 64 bytes con sal de 32
+  OK     Trigger anotó el usuario en LogUsuarios
+  OK     LogUsuarios no tiene columnas de contraseña
+  OK     Correo duplicado rechazado
+  OK     Contraseña débil rechazada
+  OK     Login con contraseña incorrecta falla
+  OK     Login correcto
+  OK     ID de sesión regenerado al iniciar sesión
+
+== 4. SQL Injection
+  OK     Login con "' OR '1'='1' --" no entra
+  OK     Login con "admin@cineaurora.test' --" no entra
+  OK     Login con "'; DROP TABLE dbo.Usuarios; --" no entra
+  OK     Login con '" OR 1=1 --' no entra
+  OK     GET pelicula.php?id=1%20OR%201=1 -> 404 sin error SQL
+  OK     GET pelicula.php?id=1;DROP%20TABLE%20dbo.Peliculas -> 404 sin error SQL
+  OK     GET pelicula.php?id=-1 -> 404 sin error SQL
+  OK     GET pelicula.php?id=' -> 404 sin error SQL
+  OK     Nombre con inyección rechazado por la validación
+  OK     Comillas y -- se guardan como texto literal (consulta parametrizada)
+  OK     Tablas intactas
+
+== 5. Compra normal y validaciones de tarjeta
+  OK     Luhn inválido rechazado
+  OK     Marca distinta al número rechazada
+  OK     Discover (marca no aceptada) rechazada
+  OK     Tarjeta vencida rechazada
+  OK     AMEX exige CVV de 4 dígitos
+  OK     Tarjeta de rechazo simulado
+  OK     Compra con Mastercard exitosa
+  OK     Boletos imprimibles con código de barras
+  OK     Tarjeta enmascarada en el recibo
+  OK     Asientos pasan a ocupados
+  OK     Mapa los muestra como comprados por el usuario
+  OK     No existe columna CVV
+  OK     SELECT sobre Tarjetas no muestra el número en claro
+  OK     Otro cliente no puede ver boletos ajenos (404)
+  OK     Reenvío del pago (token de un solo uso) no duplica
+
+== 6. Límite de 10 boletos por usuario y función
+  OK     Luis ve que ya tiene 8 y puede comprar 2
+  OK     Comprar 3 más (8+3) rechazado en el servidor
+  OK     Comprar 2 (8+2=10) permitido
+  OK     Con 10 boletos el mapa queda bloqueado
+  OK     La base (procedimiento) rechaza el boleto 11 (Resultado 14)
+  OK     El trigger trg_Boletos_Max10 bloquea un INSERT directo (error 50010)
+  OK     Más de 10 asientos en una sola petición rechazado
+
+== 7. Doble venta del mismo asiento (concurrencia)
+  OK     Ronda 1: 3 clientes pagan el asiento 249 a la vez -> 1 compra, 2 rechazos
+  OK     Ronda 2: 3 clientes pagan el asiento 251 a la vez -> 1 compra, 2 rechazos
+  OK     Ronda 3: 3 clientes pagan el asiento 253 a la vez -> 1 compra, 2 rechazos
+  OK     Ronda 4: 3 clientes pagan el asiento 255 a la vez -> 1 compra, 2 rechazos
+  OK     Ronda 5: 3 clientes pagan el asiento 257 a la vez -> 1 compra, 2 rechazos
+  OK     Ningún asiento vendido dos veces en la base
+  OK     UNIQUE(FuncionID, AsientoID) rechaza un INSERT duplicado directo
+
+== 8. Administrador
+  OK     Cliente en admin -> 403
+  OK     Cliente en API del panel -> 403
+  OK     Anónimo en admin -> login
+  OK     Admin entra al panel
+  OK     API en vivo: total recaudado coincide con la base
+  OK     API en vivo lista funciones vendidas
+  OK     Alta de función que se encima con otra -> rechazada
+  OK     Alta de función válida (23:45)
+  OK     Modificación de horario y precio
+  OK     Borrar función sin ventas
+  OK     Borrar función con ventas la retira y conserva ventas
+  OK     Acción de admin sin CSRF -> 400
+  OK     Renombrar película
+  OK     Nuevo nombre visible en cartelera y escapado (htmlspecialchars)
+  OK     Ventas muestran tarjeta enmascarada
+  OK     Log de usuarios visible para admin
+
+== 9. Archivos protegidos, cabeceras y errores
+  OK     includes/config.php bloqueado
+  OK     includes/db.php bloqueado
+  OK     logs/php_errores.log bloqueado
+  OK     includes/ bloqueado
+  OK     CSP, X-Frame-Options y nosniff presentes
+  OK     Cookie de sesión HttpOnly y SameSite
+  OK     Sin listado de directorios
+
+Ejecutado el 2026-11-04 23:24 (America/Monterrey) en el banco Linux: SQL Server 2022 Express (Docker), Apache 2.4 + PHP 8.3 + pdo_sqlsrv 5.12.
+Resultado: 81/81 pruebas correctas

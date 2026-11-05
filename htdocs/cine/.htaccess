@@ -1,0 +1,20 @@
+# Cine Aurora · ajustes de Apache (XAMPP)
+Options -Indexes
+DirectoryIndex index.php
+
+# Archivos que nunca deben servirse
+<FilesMatch "\.(sql|md|log|ini|bak|sh|py|json|lock|dist)$">
+    Require all denied
+</FilesMatch>
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header always unset X-Powered-By
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# Tipos correctos para el favicon y los SVG
+AddType image/svg+xml .svg
+AddType image/x-icon .ico

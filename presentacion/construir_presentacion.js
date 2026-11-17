@@ -123,7 +123,8 @@ pres.addSection({ title: "Inicio" });
     const x = 0.6 + i * (w + gap);
     tarjeta(s, x, 1.85, w, 3.2);
     s.addShape(pres.shapes.OVAL, { x: x + w / 2 - 0.6, y: 2.2, w: 1.2, h: 1.2, fill: { color: [C.accent3, C.accent2, C.accent1, C.accent4, C.accent5][i % 5] }, line: { width: 0, color: C.accent6 }, objectName: id("avatar") });
-    const ini = p.nombre.split(/\s+/).filter(Boolean).slice(0, 2).map((x) => x[0]).join("").toUpperCase();
+    const partes = p.nombre.split(/\s+/).filter(Boolean);  // nombre(s) + apellido paterno + materno
+    const ini = (partes[0][0] + (partes.length >= 3 ? partes[partes.length - 2][0] : (partes[1] || " ")[0])).toUpperCase();
     texto(s, ini, { x: x + w / 2 - 0.6, y: 2.2, w: 1.2, h: 1.2, align: "center", valign: "middle", fontSize: 28, bold: true, color: C.text1 });
     texto(s, p.nombre, { x: x + 0.2, y: 3.6, w: w - 0.4, h: 0.8, align: "center", valign: "middle", fontSize: 17, bold: true });
     texto(s, "Matrícula " + p.matricula, { x: x + 0.2, y: 4.4, w: w - 0.4, h: 0.4, align: "center", fontSize: 14, color: C.background2 });

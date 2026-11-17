@@ -1,6 +1,10 @@
-/* Genera Presentación_Proyecto_3.pptx
+/* Genera Presentación_Proyecto_3.pdf
+   Arma las diapositivas con pptxgenjs en un archivo temporal y las exporta
+   a PDF con LibreOffice (soffice); el archivo intermedio se borra.
    Uso (desde la raíz del repositorio):
      cd presentacion && npm install && node construir_presentacion.js
+   Requiere LibreOffice. Si soffice no está en el PATH, indique su ruta en
+   la variable SOFFICE (p. ej. "C:\\Program Files\\LibreOffice\\program\\soffice.exe").
    Nombres y matrículas: presentacion/equipo.json */
 const path = require("path");
 const fs = require("fs");
@@ -10,7 +14,12 @@ const AQUI = __dirname;
 const R = (f) => path.join(AQUI, "recursos", f);
 const CAP = (f) => path.join(AQUI, "capturas", f);
 const DATOS = JSON.parse(fs.readFileSync(path.join(AQUI, "equipo.json"), "utf8"));
-const SALIDA = path.join(AQUI, "Presentación_Proyecto_3.pptx");
+const os = require("os");
+const { execFileSync } = require("child_process");
+const NOMBRE = "Presentación_Proyecto_3";
+const TEMP = fs.mkdtempSync(path.join(os.tmpdir(), "cine-aurora-"));
+const SALIDA = path.join(TEMP, NOMBRE + ".pptx");
+const PDF = path.join(AQUI, NOMBRE + ".pdf");
 
 const THEME = {
   name: "Cine Aurora",
@@ -420,5 +429,9 @@ pres.addSection({ title: "Cierre" });
 (async () => {
   await pres.writeFile({ fileName: SALIDA });
   await require("./aplicar_tema.js")(SALIDA, THEME);
-  console.log("Generado:", SALIDA);
+  const soffice = process.env.SOFFICE || "soffice";
+  execFileSync(soffice, ["--headless", "--convert-to", "pdf", "--outdir", TEMP, SALIDA], { stdio: "ignore", timeout: 180000 });
+  fs.copyFileSync(path.join(TEMP, NOMBRE + ".pdf"), PDF);
+  fs.rmSync(TEMP, { recursive: true, force: true });
+  console.log("Generado:", PDF);
 })();

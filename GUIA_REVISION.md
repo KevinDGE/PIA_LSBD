@@ -10,7 +10,7 @@ Revisión presencial: **jueves 19 de noviembre de 2026, desde las 6:00 PM**. Dur
    - Navegador A (normal): `http://localhost/cine/` sin sesión.
    - Navegador B (ventana privada): para el administrador.
    - SSMS con `sql/11_consultas_revision.sql` abierto (se ejecuta por bloques: seleccionar el bloque y F5).
-   - PowerPoint con `Presentación_Proyecto_3.pptx`.
+   - `Presentación_Proyecto_3.pdf` abierta en el navegador o en Adobe Reader (pantalla completa: `Ctrl + L` en Reader, `F11` en el navegador).
    - Explorador de archivos en `C:\Respaldos\CineAurora\`.
 4. Tener a la mano `CREDENCIALES_PRUEBA.md` (impreso o en el celular).
 
@@ -19,8 +19,8 @@ Revisión presencial: **jueves 19 de noviembre de 2026, desde las 6:00 PM**. Dur
 ## Criterio 1 · Documentación
 
 ### R1. Presentación con diseño adecuado
-- **Abrir:** `Presentación_Proyecto_3.pptx` en modo presentación (F5).
-- **Mostrar:** portada, equipo, objetivo, arquitectura, modelo de datos, flujo de compra, transacción, cifrado, medidas de seguridad, administrador, respaldo, pruebas y conclusiones. Las notas del orador traen qué decir en cada diapositiva.
+- **Abrir:** `Presentación_Proyecto_3.pdf` en pantalla completa y avanzar con las flechas o `Av Pág`.
+- **Mostrar:** portada, equipo, objetivo, arquitectura, modelo de datos, flujo de compra, transacción, cifrado, medidas de seguridad, administrador, respaldo, pruebas y conclusiones. Lo que se dice en cada diapositiva está en la tabla *Qué decir en cada diapositiva*, al final de esta guía.
 
 ## Criterio 2 · Infraestructura
 
@@ -141,6 +141,26 @@ Recorrer o mencionar: `index.php` (cartelera), `pelicula.php`, `registro.php`, `
 **Cada integrante** sube:
 - `Paginas_Proyecto_3.zip` (carpeta `entregables/` del repositorio)
 - `Respaldo_Proyecto_3.BAK` (generado en la VM con el script 09)
-- `Presentación_Proyecto_3.pptx` (carpeta `presentacion/`)
+- `Presentación_Proyecto_3.pdf` (carpeta `presentacion/`)
 
 > La rúbrica general del PIA pide los nombres `PIA_(#Equipo)_LSBD.zip` y `BD_(#Equipo)_LSBD.BAK`, es decir `PIA_3_LSBD.zip` y `BD_3_LSBD.BAK`. Confirmen con el profesor qué nombre espera; si hay duda, suban ambas copias con los dos nombres.
+
+## Qué decir en cada diapositiva
+
+El PDF no guarda notas del orador; estas son las de cada página.
+
+| # | Diapositiva | Qué decir |
+|---|---|---|
+| 1 | Portada | Presentación del equipo 3. Proyecto: compra de boletos de cine en una interfaz estilo cartelera, con el enfoque del laboratorio: seguridad de la base de datos en SQL Server 2022 Express. |
+| 2 | Equipo | Presentar a cada integrante y su matrícula. Los datos se editan en presentacion/equipo.json. |
+| 3 | Objetivo | Proceso de negocio asignado: compra de boletos de cine. Los cuatro números resumen las reglas más importantes que se demostrarán: límite de boletos, cifrado de tarjetas, hash de contraseñas y usuario de mínimo privilegio. |
+| 4 | Arquitectura | Todo corre dentro de la VM: Apache de XAMPP sirve las páginas PHP desde htdocs\\cine, PHP usa los drivers oficiales de Microsoft (pdo_sqlsrv) y se conecta por TCP 1433 a SQL Server 2022 Express. La aplicación no tiene SQL armado con texto del usuario: solo llama procedimientos del esquema app. |
+| 5 | Modelo de datos | La tabla productiva es Boletos: su restricción UNIQUE(FuncionID, AsientoID) impide vender dos veces el mismo asiento, y sus llaves foráneas compuestas garantizan que el asiento pertenece a la sala de la función y que el boleto es de la misma función que su compra. Hay índices en Funciones (película y fecha), Compras (usuario y función) y Boletos. |
+| 6 | Flujo de compra | Demostración: entrar sin sesión, abrir una película, intentar elegir horario y ver que pide iniciar sesión. Después elegir asientos (máximo 10), pagar con tarjeta de prueba e imprimir los boletos. |
+| 7 | Transacción | app.sp_ComprarBoletos usa SET XACT_ABORT ON y TRY/CATCH: si cualquier paso falla se revierte todo. Si dos personas eligen el mismo asiento, la segunda recibe 'Uno o más asientos acaban de ser vendidos'. Se probó con 3 sesiones simultáneas en 5 rondas. |
+| 8 | Cifrado | Requisito de mayor peso (R17). Mostrar en SSMS: SELECT * FROM dbo.Tarjetas devuelve solo 0x…; DECRYPTBYKEY sin abrir la llave devuelve NULL; como cine_app OPEN SYMMETRIC KEY falla. Script 11, sección R17. |
+| 9 | Otras medidas | Recorrer las seis tarjetas. Para la demostración: intento de inyección en el login, tabla LogUsuarios tras registrar a alguien, sys.server_principals con sa desactivado y la sesión de la web entrando como cine_app. |
+| 10 | Administrador | Iniciar sesión como admin@cineaurora.test. Mientras otra ventana compra boletos, el panel cambia solo. Mostrar alta de una función, cambio de horario, borrado (si tiene ventas se retira y conserva el historial) y cambio de nombre de una película. |
+| 11 | Respaldo | R19: en vivo basta con el asistente de SSMS (clic derecho en CineAuroraDB > Tareas > Copia de seguridad) o con el script 09_respaldo.sql. Explicar por qué sin la contraseña de la DMK o sin el respaldo del certificado no se recuperan las tarjetas. |
+| 12 | Pruebas | Las pruebas se ejecutaron en un banco Linux con Docker (SQL Server 2022 Express en Linux, Apache y PHP 8.3 con pdo_sqlsrv 5.12). En la VM Windows se repiten con el guion de GUIA_REVISION.md. |
+| 13 | Conclusiones | Cerrar con los aprendizajes y abrir preguntas. Recordar que la entrega en Teams incluye el .zip de páginas, el .BAK y esta presentación. |

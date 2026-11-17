@@ -13,7 +13,7 @@ Portal web de un cine ficticio con cartelera, registro e inicio de sesión, pág
 | `GUIA_INSTALACION.md` | VM, SQL Server (modo mixto, TCP/IP), XAMPP, drivers de PHP, versiones compatibles, respaldo de llaves y restauración |
 | `GUIA_REVISION.md` | Guion R1 a R19: qué abrir, qué ejecutar y qué resultado mostrar |
 | `CREDENCIALES_PRUEBA.md` | Usuarios ficticios, tarjetas de prueba, logins y contraseñas de llaves |
-| `presentacion/Presentación_Proyecto_3.pptx` | Presentación (13 diapositivas con notas del orador) |
+| `presentacion/Presentación_Proyecto_3.pdf` | Presentación en PDF (13 diapositivas 16:9); qué decir en cada una está en `GUIA_REVISION.md` |
 | `entregables/Paginas_Proyecto_3.zip` | Zip para Teams: carpeta `cine/` + `scripts_sql/` |
 | `tests/` | Pruebas automatizadas de extremo a extremo y banco de pruebas en Linux |
 | `herramientas/` | Generador de pósters/íconos y empaquetado del zip |
@@ -26,7 +26,7 @@ El enunciado traía marcadores sin llenar. Se tomaron estas decisiones:
 |---|---|
 | `[NOMBRE DEL CINE]` | **Cine Aurora** (constante `SITIO_NOMBRE` en `includes/config.php`) |
 | `[NOMBRE DE LA BASE DE DATOS]` | **CineAuroraDB** |
-| `[NOMBRES Y MATRÍCULAS]` | **Pendiente.** Escríbanlos en `presentacion/equipo.json` y regeneren la presentación (`cd presentacion && npm install && node construir_presentacion.js`) o edítenlos directo en la diapositiva 2 |
+| `[NOMBRES Y MATRÍCULAS]` | **Pendiente.** Escríbanlos en `presentacion/equipo.json` y regeneren el PDF (`cd presentacion && npm install && node construir_presentacion.js`; requiere Node.js y LibreOffice), o pásenme los datos y lo regenero |
 
 ## Decisiones técnicas
 
@@ -54,7 +54,7 @@ No había Windows Server en el entorno de desarrollo, así que se montó un **ba
 
 | Req | Cumplido | Archivo o evidencia | ¿Probado? |
 |---|---|---|---|
-| R1 Presentación | Sí | `presentacion/Presentación_Proyecto_3.pptx` (13 diapositivas, notas del orador) | Validada y revisada visualmente con LibreOffice. **Falta:** abrirla en PowerPoint y llenar nombres/matrículas |
+| R1 Presentación | Sí | `presentacion/Presentación_Proyecto_3.pdf` (13 diapositivas) | PDF generado y revisado página por página. **Falta:** llenar nombres y matrículas |
 | R2 Windows Server 2022 en VM | Preparado | `GUIA_INSTALACION.md` §1 | **Falta probar en su VM** (no se puede ejecutar aquí) |
 | R3 SQL Server 2022 Express | Sí | `sql/01…12` | Probado en SQL Server 2022 Express sobre Linux. **Falta:** ejecutar los scripts en la VM Windows |
 | R4 Apache activo | Sí | `htdocs/cine/.htaccess`, `GUIA_INSTALACION.md` §4 | Probado en Apache 2.4 (Linux). **Falta:** XAMPP en Windows |
@@ -80,4 +80,4 @@ No había Windows Server en el entorno de desarrollo, así que se montó un **ba
 2. Ejecutar `sql/01` a `sql/08` **con Autenticación de Windows**, con snapshot antes del 08, y confirmar que el 08 no se detiene (debe encontrar su usuario de Windows como sysadmin).
 3. Abrir `http://localhost/cine/` y recorrer `GUIA_REVISION.md` completa una vez antes del día de la revisión.
 4. Ejecutar `sql/09_respaldo.sql` y subir el `.BAK` generado en **su** VM (el respaldo debe salir de su instancia).
-5. Llenar nombres y matrículas en la presentación.
+5. Llenar nombres y matrículas en `presentacion/equipo.json` y regenerar el PDF.

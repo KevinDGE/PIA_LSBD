@@ -28,7 +28,11 @@ Pasos en orden para dejar funcionando el sistema en una **máquina virtual local
    - VMware: *Create a New Virtual Machine* > *Typical* > ISO > *Windows Server 2022*. Mismos recursos.
 3. Instala eligiendo **Windows Server 2022 Standard Evaluation (Experiencia de escritorio)**. Sin "Experiencia de escritorio" no hay interfaz gráfica.
 4. Define la contraseña del usuario `Administrador` y anótala.
-5. Instala *Guest Additions* (VirtualBox) o *VMware Tools* para tener pantalla completa y portapapeles.
+5. Instala *Guest Additions* (VirtualBox) o *VMware Tools* para tener pantalla completa, portapapeles y carpetas compartidas. Sin ellas, arrastrar archivos a la VM falla con `VBOX_E_DND_ERROR`.
+   - VirtualBox: *Dispositivos > Insertar imagen de CD de las «Guest Additions»…*. Si dice que la unidad está ocupada, primero *Dispositivos > Unidades ópticas > Eliminar disco de la unidad virtual*.
+   - En la VM: *Explorador de archivos > Este equipo > Unidad de CD (D:) VirtualBox Guest Additions* > doble clic en `VBoxWindowsAdditions.exe` > *Next* hasta terminar (acepta instalar los controladores) > *Reboot now*.
+   - Después: *Dispositivos > Portapapeles compartido > Bidireccional* y *Dispositivos > Arrastrar y soltar > Bidireccional*.
+   - Para pasar archivos, lo más confiable es una **carpeta compartida**: *Dispositivos > Carpetas compartidas > Preferencias de carpetas compartidas* > ícono **+** > elige la carpeta de tu equipo donde está `Paginas_Proyecto_3.zip`, marca **Automontar** y **Hacer permanente**. En la VM aparece como unidad de red (por ejemplo `Z:`) en *Este equipo*; copia de ahí el zip a `C:\` y descomprímelo.
 6. Cambia el nombre del equipo si quieres (por ejemplo `SRV-CINE`) y reinicia.
 7. Pon la zona horaria en *(UTC-06:00) Guadalajara, Ciudad de México, Monterrey*. La cartelera usa la hora del servidor.
 8. **Toma un snapshot** llamado `01 Windows limpio`.

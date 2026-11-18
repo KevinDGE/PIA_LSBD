@@ -24,7 +24,7 @@ Pasos en orden para dejar funcionando el sistema en una **máquina virtual local
 
 1. Descarga la ISO de *Windows Server 2022 Evaluation* (Microsoft Evaluation Center).
 2. Crea la VM:
-   - VirtualBox: *Nueva* > Tipo *Microsoft Windows*, Versión *Windows 2022 (64-bit)*. 2 CPU, **4 a 6 GB de RAM**, disco de **60 GB**. Marca "Omitir instalación desatendida" si quieres elegir la edición a mano.
+   - VirtualBox: *Nueva* > Tipo *Microsoft Windows*, Versión *Windows 2022 (64-bit)*. 2 CPU, **4 a 6 GB de RAM**, disco de **60 GB**. **Marca "Omitir instalación desatendida" (Skip Unattended Installation)**: es obligatorio. La instalación desatendida de VirtualBox no funciona con la ISO de evaluación y termina en el error *"Windows no puede encontrar los Términos de licencia del software de Windows"* (ver 1.1).
    - VMware: *Create a New Virtual Machine* > *Typical* > ISO > *Windows Server 2022*. Mismos recursos.
 3. Instala eligiendo **Windows Server 2022 Standard Evaluation (Experiencia de escritorio)**. Sin "Experiencia de escritorio" no hay interfaz gráfica.
 4. Define la contraseña del usuario `Administrador` y anótala.
@@ -32,6 +32,17 @@ Pasos en orden para dejar funcionando el sistema en una **máquina virtual local
 6. Cambia el nombre del equipo si quieres (por ejemplo `SRV-CINE`) y reinicia.
 7. Pon la zona horaria en *(UTC-06:00) Guadalajara, Ciudad de México, Monterrey*. La cartelera usa la hora del servidor.
 8. **Toma un snapshot** llamado `01 Windows limpio`.
+
+### 1.1 Error "Windows no puede encontrar los Términos de licencia del software de Windows"
+
+Aparece al iniciar la instalación en VirtualBox. Casi siempre es la **instalación desatendida** de VirtualBox (le pasa a la VM un archivo de respuestas con una edición o clave que no corresponde a la ISO de evaluación); con menos frecuencia, poca memoria o una ISO dañada.
+
+1. Pulsa *Aceptar* y apaga la VM (*Máquina > Apagar* o cerrar la ventana > *Apagar la máquina*).
+2. *Configuración > Almacenamiento*: quita el disquete o la segunda unidad óptica que creó VirtualBox (archivos llamados `Unattended-…` o `…aux-iso.viso`). Deja solo el disco duro y la ISO de Windows Server en la unidad óptica.
+3. *Configuración > Sistema > Placa base*: en el orden de arranque desmarca *Disquete* y deja *Óptica* antes que *Disco duro*. Memoria base **4096 MB o más**. En *Procesador*: 2 CPU.
+4. Inicia la VM y, cuando diga *Press any key to boot from CD or DVD*, pulsa una tecla. Elige idioma > *Instalar ahora* > **Windows Server 2022 Standard Evaluation (Experiencia de escritorio)** > aceptar términos > *Personalizada* > el disco sin asignar > *Siguiente*.
+
+Si el error sigue, borra la VM (*Eliminar > Borrar todos los archivos*) y créala otra vez marcando **Omitir instalación desatendida**. Si aún falla, la ISO puede estar dañada: debe pesar unos 4.7 GB; descárgala de nuevo (formato **ISO**, no VHD) desde el Microsoft Evaluation Center.
 
 ## 2. SQL Server 2022 Express (R3)
 

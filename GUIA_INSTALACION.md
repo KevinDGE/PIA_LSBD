@@ -200,3 +200,25 @@ El script 08 desactiva `sa` y cualquier otro login SQL que no sea `cine_app`.
 **Restaurar en otra instancia:** copia el `.BAK`, ajusta la ruta en `10_restaurar_otra_instancia.sql` y ejecútalo. El script restaura la base, deja a `sa` como dueño, abre la DMK con su contraseña y la vuelve a proteger con la Service Master Key nueva (`ALTER MASTER KEY ADD ENCRYPTION BY SERVICE MASTER KEY`), comprueba que las tarjetas se descifran y vuelve a ligar el usuario `cine_app`. Si se perdió la contraseña de la DMK, el mismo script trae el **Plan B** con `RESTORE MASTER KEY FROM FILE`. Después ejecuta `08_usuarios_permisos.sql` en esa instancia.
 
 Esta restauración se probó en el banco de pruebas: el `.BAK` se restauró en una segunda instancia de SQL Server 2022 Express, las 4 tarjetas de ejemplo se descifraron y `cine_app` pudo comprar y consultar compras.
+
+## 10. Ver el sitio desde un celular
+
+El celular y la computadora deben estar en la **misma red Wi-Fi**. Solo se abre el puerto 80 (web); el 1433 de SQL Server sigue cerrado.
+
+**Opción A · Adaptador puente (recomendada)**
+1. Apaga la VM. *Configuración > Red > Adaptador 1 > Conectado a:* **Adaptador puente**; en *Nombre* elige la tarjeta Wi-Fi de tu computadora. Enciende la VM.
+2. En la VM, PowerShell como administrador:
+   ```powershell
+   New-NetFirewallRule -DisplayName "Apache HTTP 80" -Direction Inbound -Protocol TCP -LocalPort 80 -Action Allow
+   ipconfig
+   ```
+   Anota la *Dirección IPv4* (por ejemplo `192.168.1.50`).
+3. En el celular: `http://192.168.1.50/cine/`
+
+**Opción B · NAT con reenvío de puertos** (si la puente no obtiene IP)
+1. *Configuración > Red > Adaptador 1 (NAT) > Avanzadas > Reenvío de puertos* > **+**: Protocolo TCP, Puerto anfitrión **8080**, Puerto invitado **80** (deja las IP vacías).
+2. En la VM crea la misma regla de firewall del paso A.2.
+3. En tu computadora (no en la VM) ejecuta `ipconfig` y anota la IPv4 del Wi-Fi. Si Windows pregunta si permite a VirtualBox en la red, acepta **Redes privadas**.
+4. En el celular: `http://IP-de-tu-computadora:8080/cine/`
+
+Si no carga: algunas redes (escuela, cafeterías) aíslan a los dispositivos entre sí. Usa el **punto de acceso del celular**: conecta la computadora a él y abre la misma dirección desde el celular.

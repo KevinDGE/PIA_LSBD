@@ -140,7 +140,7 @@ El script 08 desactiva `sa` y cualquier otro login SQL que no sea `cine_app`.
 1. Instala **Microsoft ODBC Driver 18 for SQL Server (x64)** (`msodbcsql.msi`).
 2. Descarga **Microsoft Drivers for PHP for SQL Server 5.12** (`SQLSRV512.ZIP`) y descomprímelo.
 3. Revisa tu PHP: en `C:\xampp\php` ejecuta `php -v` (versión) y `php -i | findstr "Thread"` (debe decir *Thread Safety => enabled*).
-4. Copia a `C:\xampp\php\ext\` los dos archivos que coinciden (para XAMPP 8.2: `php_pdo_sqlsrv_82_ts_x64.dll` y `php_sqlsrv_82_ts_x64.dll`).
+4. Copia a `C:\xampp\php\ext\` los dos archivos que coinciden (para XAMPP 8.2: `php_pdo_sqlsrv_82_ts_x64.dll` y `php_sqlsrv_82_ts_x64.dll`). Si tu XAMPP trae **PHP 8.3**, usa los de `83`: `php_pdo_sqlsrv_83_ts_x64.dll` y `php_sqlsrv_83_ts_x64.dll` (y esos mismos nombres en el `php.ini`). El sitio también se probó con PHP 8.3.
 5. Edita `C:\xampp\php\php.ini` (XAMPP Control Panel > Apache > *Config* > *PHP (php.ini)*) y agrega al final de la sección de extensiones:
 
    ```ini

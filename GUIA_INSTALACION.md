@@ -53,14 +53,15 @@ Si el error sigue, borra la VM (*Eliminar > Borrar todos los archivos*) y créal
 1. Descarga `SQL2022-SSEI-Expr.exe` desde la página de descargas de SQL Server de Microsoft y ejecútalo.
 2. Elige **Personalizada** (Custom). Así puedes escoger el modo de autenticación durante la instalación.
 3. En el *Centro de instalación*: *Nueva instalación independiente de SQL Server*.
-4. Características: *Servicios de Motor de base de datos* (lo demás es opcional).
-5. Instancia con nombre: **SQLEXPRESS** (valor por defecto).
-6. **Configuración del motor de base de datos > Configuración del servidor**:
+4. En la página **Azure Extension for SQL Server** **desmarca** la casilla *Azure Extension for SQL Server* y pulsa *Next* (no se usa Azure; si la dejas marcada pide datos de una suscripción).
+5. Características: *Database Engine Services* / *Servicios de Motor de base de datos* (lo demás es opcional).
+6. Instancia con nombre: **SQLEXPRESS** (valor por defecto).
+7. **Configuración del motor de base de datos > Configuración del servidor**:
    - Selecciona **Modo mixto (autenticación de SQL Server y de Windows)**. La aplicación entra con un login de SQL Server (`cine_app`).
    - Escribe una contraseña para `sa` (se desactiva más adelante con el script 08; anótala de todos modos).
    - En *Especificar administradores de SQL Server* pulsa **Agregar usuario actual** (`SRV-CINE\Administrador`). **Esta es la vía de administración** que queda cuando se desactive `sa`.
-7. Termina la instalación.
-8. Instala **SSMS** (SQL Server Management Studio) y conéctate con *Servidor:* `localhost\SQLEXPRESS`, *Autenticación:* **Autenticación de Windows**.
+8. Termina la instalación.
+9. Instala **SSMS** (SQL Server Management Studio) y conéctate con *Servidor:* `localhost\SQLEXPRESS`, *Autenticación:* **Autenticación de Windows**.
 
 ### 2.1 Si ya tenías SQL Server instalado solo con autenticación de Windows
 

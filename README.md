@@ -13,7 +13,7 @@ Portal web de un cine ficticio con cartelera, registro e inicio de sesión, pág
 | `GUIA_INSTALACION.md` | VM, SQL Server (modo mixto, TCP/IP), XAMPP, drivers de PHP, versiones compatibles, respaldo de llaves y restauración |
 | `GUIA_REVISION.md` | Guion R1 a R19: qué abrir, qué ejecutar y qué resultado mostrar |
 | `CREDENCIALES_PRUEBA.md` | Usuarios ficticios, tarjetas de prueba, logins y contraseñas de llaves |
-| `presentacion/Presentación_Proyecto_3.pdf` | Presentación en PDF (13 diapositivas 16:9); qué decir en cada una está en `GUIA_REVISION.md` |
+| `presentacion/Presentación_Proyecto_3.pptx` y `.pdf` | Presentación (13 diapositivas 16:9). El `.pptx` es el que pide la tarea de Teams; el PDF tiene el mismo contenido. Qué decir en cada una está en `GUIA_REVISION.md` |
 | `entregables/Paginas_Proyecto_3.zip` | Zip para Teams: carpeta `cine/` + `scripts_sql/` |
 | `tests/` | Pruebas automatizadas de extremo a extremo y banco de pruebas en Linux |
 | `herramientas/` | Generador de pósters/íconos y empaquetado del zip |

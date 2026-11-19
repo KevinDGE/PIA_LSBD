@@ -1,4 +1,4 @@
-/* Genera Presentación_Proyecto_3.pdf
+/* Genera Presentación_Proyecto_3.pptx (entrega en Teams) y Presentación_Proyecto_3.pdf
    Arma las diapositivas con pptxgenjs en un archivo temporal y las exporta
    a PDF con LibreOffice (soffice); el archivo intermedio se borra.
    Uso (desde la raíz del repositorio):
@@ -433,6 +433,7 @@ pres.addSection({ title: "Cierre" });
   const soffice = process.env.SOFFICE || "soffice";
   execFileSync(soffice, ["--headless", "--convert-to", "pdf", "--outdir", TEMP, SALIDA], { stdio: "ignore", timeout: 180000 });
   fs.copyFileSync(path.join(TEMP, NOMBRE + ".pdf"), PDF);
+  fs.copyFileSync(SALIDA, path.join(AQUI, NOMBRE + ".pptx"));   // la tarea de Teams pide .pptx
   fs.rmSync(TEMP, { recursive: true, force: true });
-  console.log("Generado:", PDF);
+  console.log("Generado:", PDF, "y", path.join(AQUI, NOMBRE + ".pptx"));
 })();

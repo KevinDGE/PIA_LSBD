@@ -141,7 +141,7 @@ Recorrer o mencionar: `index.php` (cartelera), `pelicula.php`, `registro.php`, `
 **Cada integrante** sube:
 - `Paginas_Proyecto_3.zip` (carpeta `entregables/` del repositorio)
 - `Respaldo_Proyecto_3.BAK` (generado en la VM con el script 09)
-- `Presentación_Proyecto_3.pdf` (carpeta `presentacion/`)
+- `Presentación_Proyecto_3.pptx` (carpeta `presentacion/`; la tarea pide PowerPoint). El PDF con el mismo contenido sirve para exponer si no hay PowerPoint.
 
 > La rúbrica general del PIA pide los nombres `PIA_(#Equipo)_LSBD.zip` y `BD_(#Equipo)_LSBD.BAK`, es decir `PIA_3_LSBD.zip` y `BD_3_LSBD.BAK`. Confirmen con el profesor qué nombre espera; si hay duda, suban ambas copias con los dos nombres.
 

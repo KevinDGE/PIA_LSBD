@@ -12,6 +12,7 @@ Portal web de un cine ficticio con cartelera, registro e inicio de sesión, pág
 | `sql/01…12_*.sql` | Scripts numerados en orden de ejecución (base, tablas, datos, cifrado, procedimientos, triggers, datos demo, usuarios y permisos, respaldo, restauración, evidencias, preparación de la revisión) |
 | `GUIA_INSTALACION.md` | VM, SQL Server (modo mixto, TCP/IP), XAMPP, drivers de PHP, versiones compatibles, respaldo de llaves y restauración |
 | `GUIA_REVISION.md` | Guion R1 a R19: qué abrir, qué ejecutar y qué resultado mostrar |
+| `GUION_PRESENTACION.md` y `Guion_Presentacion_Proyecto_3.pdf` | Guion de la exposición repartido entre los 5 integrantes, con demostración en vivo y preguntas probables |
 | `CREDENCIALES_PRUEBA.md` | Usuarios ficticios, tarjetas de prueba, logins y contraseñas de llaves |
 | `presentacion/Presentación_Proyecto_3.pptx` y `.pdf` | Presentación (13 diapositivas 16:9). El `.pptx` es el que pide la tarea de Teams; el PDF tiene el mismo contenido. Qué decir en cada una está en `GUIA_REVISION.md` |
 | `entregables/Paginas_Proyecto_3.zip` | Zip para Teams: carpeta `cine/` + `scripts_sql/` |

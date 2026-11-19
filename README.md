@@ -26,7 +26,7 @@ El enunciado traía marcadores sin llenar. Quedaron así:
 |---|---|
 | `[NOMBRE DEL CINE]` | **Cine Aurora** (constante `SITIO_NOMBRE` en `includes/config.php`) |
 | `[NOMBRE DE LA BASE DE DATOS]` | **CineAuroraDB** |
-| `[NOMBRES Y MATRÍCULAS]` | Kevin Daniel Grimaldo Esquivel (1997415), David Emiliano Rangel Tovar (2155498), Fernando Garza Chavez (2142789) y Alejandro Martinez Moya (2225328), en `presentacion/equipo.json` |
+| `[NOMBRES Y MATRÍCULAS]` | Kevin Daniel Grimaldo Esquivel (1997415), David Emiliano Rangel Tovar (2155498), Fernando Garza Chavez (2142789), Alejandro Martinez Moya (2225328) y Daniel Diaz Viruega (2077767), en `presentacion/equipo.json` |
 
 ## Decisiones técnicas
 

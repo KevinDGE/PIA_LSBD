@@ -126,8 +126,8 @@ pres.addSection({ title: "Inicio" });
     const partes = p.nombre.split(/\s+/).filter(Boolean);  // nombre(s) + apellido paterno + materno
     const ini = (partes[0][0] + (partes.length >= 3 ? partes[partes.length - 2][0] : (partes[1] || " ")[0])).toUpperCase();
     texto(s, ini, { x: x + w / 2 - 0.6, y: 2.2, w: 1.2, h: 1.2, align: "center", valign: "middle", fontSize: 28, bold: true, color: C.text1 });
-    texto(s, p.nombre, { x: x + 0.2, y: 3.6, w: w - 0.4, h: 0.8, align: "center", valign: "middle", fontSize: 17, bold: true });
-    texto(s, "Matrícula " + p.matricula, { x: x + 0.2, y: 4.4, w: w - 0.4, h: 0.4, align: "center", fontSize: 14, color: C.background2 });
+    texto(s, p.nombre, { x: x + 0.15, y: 3.55, w: w - 0.3, h: 0.85, align: "center", valign: "middle", fontSize: n > 4 ? 15 : 17, bold: true });
+    texto(s, "Matrícula " + p.matricula, { x: x + 0.2, y: 4.5, w: w - 0.4, h: 0.4, align: "center", fontSize: 14, color: C.background2 });
   });
   tarjeta(s, 0.6, 5.45, 12.1, 1.15, { fill: "15131F" });
   texto(s, [

@@ -14,6 +14,7 @@ Portal web de un cine ficticio con cartelera, registro e inicio de sesión, pág
 | `GUIA_REVISION.md` | Guion R1 a R19: qué abrir, qué ejecutar y qué resultado mostrar |
 | `GUION_DIAPOSITIVAS.md` y `Guion_Diapositivas_Proyecto_3.pdf` | Guion solo de las 13 diapositivas (unos 11 min), repartido entre los 5 integrantes |
 | `GUION_PRESENTACION.md` y `Guion_Presentacion_Proyecto_3.pdf` | Guion de la exposición repartido entre los 5 integrantes, con demostración en vivo y preguntas probables |
+| `SIMULACRO_RECUPERACION.md` | Paso a paso para simular un borrado o la pérdida total de la base y recuperarla desde el `.BAK` |
 | `CREDENCIALES_PRUEBA.md` | Usuarios ficticios, tarjetas de prueba, logins y contraseñas de llaves |
 | `presentacion/Presentación_Proyecto_3.pptx` y `.pdf` | Presentación (13 diapositivas 16:9). El `.pptx` es el que pide la tarea de Teams; el PDF tiene el mismo contenido. Qué decir en cada una está en `GUIA_REVISION.md` |
 | `entregables/Paginas_Proyecto_3.zip` | Zip para Teams: carpeta `cine/` + `scripts_sql/` |
